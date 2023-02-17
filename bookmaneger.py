@@ -2,10 +2,12 @@
 import requests
 import json
 import openpyxl
+import glob
 
 url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:'
 wb = openpyxl.load_workbook("booklist.xlsx")
 ws = wb.worksheets[0]
+files = glob.glob("./bookpic/*.jpg")
 
 
 def isbntoinfo(isbn):
