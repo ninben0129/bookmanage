@@ -32,7 +32,10 @@ def isbntoinfo(isbn):
         pages = info['pageCount']
     except Exception:
         pages = "None"
-    language = info['language']
+    try:
+        language = info['language']
+    except Exception:
+        language = "None"
     # print(title)
     # print(author)
     # print(publisher)
@@ -44,17 +47,20 @@ def main():
     tmp = 2
     # isbn_input = input("input ISBN >>>")
     for path in files:
-        isbn = bctest.bcdecoder(path)
-        title, author, publisher, language, publisheddate, pages = isbntoinfo(
-            isbn)
-        ws.cell(row=tmp, column=2, value=isbn)
-        ws.cell(row=tmp, column=3, value=title)
-        ws.cell(row=tmp, column=4, value=author)
-        ws.cell(row=tmp, column=5, value=publisher)
-        ws.cell(row=tmp, column=6, value=language)
-        ws.cell(row=tmp, column=7, value=publisheddate)
-        ws.cell(row=tmp, column=8, value=pages)
-        tmp += 1
+        try:
+            isbn = bctest.bcdecoder(path)
+            title, author, publisher, language, publisheddate, pages = isbntoinfo(
+                isbn)
+            ws.cell(row=tmp, column=2, value=isbn)
+            ws.cell(row=tmp, column=3, value=title)
+            ws.cell(row=tmp, column=4, value=author)
+            ws.cell(row=tmp, column=5, value=publisher)
+            ws.cell(row=tmp, column=6, value=language)
+            ws.cell(row=tmp, column=7, value=publisheddate)
+            ws.cell(row=tmp, column=8, value=pages)
+            tmp += 1
+        except Exception:
+            pass
     wb.save("booklist.xlsx")
     wb.close()
 
