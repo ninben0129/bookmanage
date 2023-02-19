@@ -20,15 +20,24 @@ def isbntoinfo(isbn):
     info = items['volumeInfo']
     title = info['title']
     author = info['authors'][0]
-    publisher = info['publisher']
-    publisheddate = info['publishedDate']
-    pages = info['pageCount']
+    try:
+        publisher = info['publisher']
+    except Exception:
+        publisher = "None"
+    try:
+        publisheddate = info['publishedDate']
+    except Exception:
+        publisheddate = "None"
+    try:
+        pages = info['pageCount']
+    except Exception:
+        pages = "None"
     language = info['language']
     # print(title)
     # print(author)
     # print(publisher)
     # print(language)
-    return title, author, publisher, language
+    return title, author, publisher, language, publisheddate, pages
 
 
 def main():
@@ -36,12 +45,15 @@ def main():
     # isbn_input = input("input ISBN >>>")
     for path in files:
         isbn = bctest.bcdecoder(path)
-        title, author, publisher, language = isbntoinfo(isbn)
+        title, author, publisher, language, publisheddate, pages = isbntoinfo(
+            isbn)
         ws.cell(row=tmp, column=2, value=isbn)
         ws.cell(row=tmp, column=3, value=title)
         ws.cell(row=tmp, column=4, value=author)
         ws.cell(row=tmp, column=5, value=publisher)
         ws.cell(row=tmp, column=6, value=language)
+        ws.cell(row=tmp, column=7, value=publisheddate)
+        ws.cell(row=tmp, column=8, value=pages)
         tmp += 1
     wb.save("booklist.xlsx")
     wb.close()
