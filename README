@@ -1,4 +1,0 @@
-# チェスサークルの本管理プログラム
-
-写真データ or ivcam から isbn を読み取り得た本のデータを excel に書き込む
-情報:title,author,publisher
