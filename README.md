@@ -7,3 +7,7 @@ bookpic ディレクトリに保存されている jpeg 画像から isbn を読
 ## bctest.py
 
 バーコード読み取り関数を定義
+
+## bookmanageradd.py
+
+bookmanagerinit.py の後リストに本を追加するときに使用
